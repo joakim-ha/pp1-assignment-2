@@ -1,0 +1,17 @@
+# Kör alla tester (mvn test) automatiskt vid varje push och pull request.
+# Resultatet syns som en grön bock eller ett rött kryss vid commiten på GitHub.
+name: Tester
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+      - run: mvn -B test
